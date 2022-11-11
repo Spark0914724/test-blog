@@ -1,0 +1,8 @@
+/vendor/
+/node_modules/
+/templates_c/
+/cache/
+*.log
+.env
+.DS_Store
+/public/assets/css/*.map

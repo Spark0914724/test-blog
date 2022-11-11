@@ -1,0 +1,11 @@
+{
+  "name": "blogs-assets",
+  "private": true,
+  "scripts": {
+    "build:css": "sass scss/style.scss public/assets/css/style.css --style=expanded",
+    "watch:css": "sass scss/style.scss public/assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}
