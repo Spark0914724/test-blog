@@ -153,6 +153,7 @@ final class SeederController
                 "Most trips are uneventful, but a few simple habits can greatly reduce your exposure to risk when something does go wrong.\n\nThis article covers topics such as carrying documents, using ATMs, backing up important information and recognising common scams. We also touch on digital security: protecting your accounts when using public Wi‑Fi and what to do if your phone is lost or stolen.\n\nThe goal is to leave you feeling prepared but not paranoid so you can focus on actually enjoying your time away from home.",
                 [0, 1],
             ],
+
             // Lifestyle
             [
                 '/assets/img/life1.jpg',
