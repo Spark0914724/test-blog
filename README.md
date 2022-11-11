@@ -2,6 +2,10 @@
 
 A minimal blog with categories and articles, built in **pure PHP 8** using **Smarty** and **MySQL**. No frameworks.
 
+## AI usage
+I used an AI assistant to speed up some boilerplate (project skeleton, Docker/SCSS setup, and sample seed data text), but I designed the solution, wired the project logic, and tested the application myself.
+
+
 ## Requirements
 
 - PHP 8.1+
@@ -24,16 +28,6 @@ Create the `blog` database and run the schema:
 mysql -u root -p < database/schema.sql
 ```
 
-The schema creates the database and tables. If you use the default credentials (user `blog`, password `blog`), create the user first:
-
-```sql
-CREATE USER IF NOT EXISTS 'blog'@'%' IDENTIFIED BY 'blog';
-GRANT ALL ON blog.* TO 'blog'@'%';
-FLUSH PRIVILEGES;
-```
-
-Then run `database/schema.sql` (e.g. `SOURCE database/schema.sql;` in MySQL client).
-
 ### 3. Configure database (optional)
 
 By default the app uses:
@@ -46,18 +40,7 @@ By default the app uses:
 
 Override with environment variables: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`.
 
-### 4. Smarty directories
-
-Ensure `templates_c` and `cache` exist and are writable:
-
-```bash
-mkdir -p templates_c cache
-chmod 777 templates_c cache
-```
-
-On Windows, ensure the PHP process can write to these folders.
-
-### 5. (Optional) Compile SCSS
+### 4. (Optional) Compile SCSS
 
 Styles are built from SCSS. Pre-compiled CSS is in `public/assets/css/style.css`. To rebuild:
 
@@ -68,15 +51,7 @@ npm run build:css
 
 To watch for changes: `npm run watch:css`.
 
-### 6. Run the app
-
-**Using PHP built-in server:**
-
-```bash
-php -S localhost:8080 -t public
-```
-
-Then open: http://localhost:8080
+### 5. Run the app
 
 **Using Docker:**
 
