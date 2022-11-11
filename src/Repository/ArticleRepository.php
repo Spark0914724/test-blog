@@ -33,11 +33,23 @@ final class ArticleRepository
 
     /**
      * Get paginated articles for a category with optional sort.
+     * $sort: "date" or "views"
+     * $direction: "asc" or "desc"
      * @return list<array<string, mixed>>
      */
-    public function getByCategoryId(int $categoryId, int $limit, int $offset, string $sort = 'date'): array
-    {
-        $orderBy = $sort === 'views' ? 'a.views DESC, a.published_at DESC' : 'a.published_at DESC';
+    public function getByCategoryId(
+        int $categoryId,
+        int $limit,
+        int $offset,
+        string $sort = 'date',
+        string $direction = 'desc'
+    ): array {
+        $direction = strtolower($direction) === 'asc' ? 'ASC' : 'DESC';
+        if ($sort === 'views') {
+            $orderBy = "a.views {$direction}, a.published_at {$direction}";
+        } else {
+            $orderBy = "a.published_at {$direction}, a.views {$direction}";
+        }
         $sql = <<<SQL
             SELECT a.id, a.image, a.title, a.description, a.published_at, a.views
             FROM articles a

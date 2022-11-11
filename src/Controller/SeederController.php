@@ -26,8 +26,8 @@ final class SeederController
         $this->seedCategories();
         $this->seedArticles();
 
-        header('Content-Type: text/plain; charset=utf-8');
-        echo "Seeding completed. Categories and articles have been added.\n";
+        header('Location: index.php?page=home', true, 302);
+        exit;
     }
 
     private function seedCategories(): void
