@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Config\Database;
-
+use App\Controller\ArticleController;
 use App\Controller\CategoryController;
 use App\Controller\HomeController;
 use App\Controller\SeederController;
@@ -47,6 +47,11 @@ switch ($page) {
     case 'category':
         $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
         $controller = new CategoryController($pdo, $smarty, $config);
+        $controller->show($id);
+        break;
+    case 'article':
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $controller = new ArticleController($pdo, $smarty, $config);
         $controller->show($id);
         break;
     default:
