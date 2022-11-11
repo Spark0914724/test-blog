@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Config\Database;
+
+use App\Controller\CategoryController;
 use App\Controller\HomeController;
 use App\Controller\SeederController;
 use Smarty\Smarty;
@@ -41,6 +43,11 @@ switch ($page) {
     case 'home':
         $controller = new HomeController($pdo, $smarty, $config);
         $controller->index();
+        break;
+    case 'category':
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $controller = new CategoryController($pdo, $smarty, $config);
+        $controller->show($id);
         break;
     default:
         header('Location: index.php?page=home', true, 302);

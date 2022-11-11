@@ -10,7 +10,28 @@ final class CategoryRepository
 {
     public function __construct(private PDO $pdo) {}
 
-   
+    /**
+     * @return list<array{id: int, title: string, description: string|null, article_count: int}>
+     */
+    public function getCategoriesWithArticleCount(): array
+    {
+        $sql = <<<'SQL'
+            SELECT c.id, c.title, c.description,
+                   COUNT(ac.article_id) AS article_count
+            FROM categories c
+            LEFT JOIN article_categories ac ON ac.category_id = c.id
+            GROUP BY c.id
+            HAVING article_count > 0
+            ORDER BY c.title
+        SQL;
+        $stmt = $this->pdo->query($sql);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as &$row) {
+            $row['id'] = (int) $row['id'];
+            $row['article_count'] = (int) $row['article_count'];
+        }
+        return $rows;
+    }
 
     /**
      * @return array{id: int, title: string, description: string|null}|null
