@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Config\Database;
 use App\Controller\HomeController;
+use App\Controller\SeederController;
 use Smarty\Smarty;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -29,6 +30,12 @@ $pdo = Database::getConnection($config['db']);
 
 $page = $_GET['page'] ?? 'home';
 $action = $_GET['action'] ?? null;
+
+if ($action === 'seed') {
+    $controller = new SeederController($pdo, $smarty, $config);
+    $controller->run();
+    exit;
+}
 
 switch ($page) {
     case 'home':
